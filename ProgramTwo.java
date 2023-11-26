@@ -6,15 +6,15 @@ import java.util.Scanner;
 public class ProgramTwo {
 
     public static void main(String[] args) {
-        // Specify the CSV file path
-        String csvFilePath = "hola.csv";
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the file name (include .csv extension)");
+        String csvFilePath = scanner.nextLine();
 
-        // Read data from CSV and create an array of CovidData objects
-        CovidData[] covidDataArray = readCsv("Hola.csv");
+        // Read data from CSV and create an array of CovidData
+        CovidData[] covidDataArray = readCsv(csvFilePath);
 
         if (covidDataArray != null && covidDataArray.length > 0) {
-            // Additional User Interaction for different analyses
-            Scanner scanner = new Scanner(System.in);
+            //  Menu for different analyses
             System.out.println("Analysis Mode: \n1 for Overall\n2 for Specific Continent");
             int choice = scanner.nextInt();
             scanner.nextLine();
