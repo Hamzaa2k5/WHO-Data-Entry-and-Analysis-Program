@@ -1,30 +1,39 @@
+/*
+ * WHO Data Entry Program - Program One
+ * Author: [Hamza Ahmad]
+ * Date: [26/11/23]
+ */
+
 import java.io.*;
 import java.util.Scanner;
-import java.io.*;
-import java.nio.file.*;
 
-public class CovidInput {
+public class programOne {
 
 
+    // Variable to store countries
     public static int countryCount;
 
     public static void main(String[] args) {
         System.out.println("Welcome to the WHO Data Entry Program");
         Scanner scan = new Scanner(System.in);
 
+        // Prompt number of countries from user
         System.out.print("How many countries' data will you enter: ");
         countryCount = scan.nextInt();
         scan.nextLine(); // Consume the newline character
 
+        // Creatign arrays
         String[] countryNames = new String[countryCount];
         String[] countryCodes = new String[countryCount];
         String[] continents = new String[countryCount];
         int[] cases = new int[countryCount];
         int[] deaths = new int[countryCount];
 
+        // Loop for countries
         for (int i = 0; i < countryCount; i++) {
             System.out.println("Enter details for Country #" + (i + 1));
 
+            // Getting user details about the country
             countryNames[i] = getUserInput("Enter Country #" + (i + 1) + " Name: ", scan);
             countryCodes[i] = getUserInput("Enter Country #" + (i + 1) + " Code: ", scan);
             continents[i] = getValidContinent(scan);
@@ -37,6 +46,7 @@ public class CovidInput {
             }
         }
 
+        // Get the csv file name
         String fileName = askFileName(scan);
         String fullFileName = fileName;
 
@@ -63,6 +73,7 @@ public class CovidInput {
 
 
 
+    // Function for getting valid continent code form user
     private static String getValidContinent(Scanner scan) {
         String continent;
         do {
@@ -72,6 +83,7 @@ public class CovidInput {
         return continent;
     }
 
+    // Function for valid continent input
     public static boolean isContinent(String continent) {
         String[] continents = {"NA", "SA", "EU", "AF", "AU", "AT", "AS", "OT"};
         for (String validContinent : continents) {
@@ -82,6 +94,7 @@ public class CovidInput {
         return false;
     }
 
+    // Function to get non-empty user input
     private static String getUserInput(String message, Scanner scan) {
         String userInput;
         do {
@@ -91,19 +104,21 @@ public class CovidInput {
         return userInput;
     }
 
+    // Function to get positive integer
     private static int getPositiveIntegerInput(String message, Scanner scan) {
         int userInput;
         do {
             System.out.print(message);
             while (!scan.hasNextInt()) {
                 System.out.println("Please enter a valid integer.");
-                scan.next(); // Consume invalid input
+                scan.next();
             }
             userInput = scan.nextInt();
         } while (userInput <= 0);
         return userInput;
     }
 
+    // CSV file function
     private static void writeCsv(String fullFileName, String[] countryNames, String[] countryCodes, String[] continents, int[] cases, int[] deaths) {
             try (PrintWriter writer = new PrintWriter(fullFileName)) {
 
@@ -127,6 +142,7 @@ public class CovidInput {
         }
 
 
+        // Function to ask for csv file name
     private static String askFileName(Scanner scanner) {
         System.out.print("Enter the CSV file name: ");
         scanner.nextLine();

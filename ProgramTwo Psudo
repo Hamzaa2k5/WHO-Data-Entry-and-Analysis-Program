@@ -1,0 +1,85 @@
+/*
+ * WHO Data Analysis  - Program Two Pseudocode
+ * Author: [Hamza Ahmad]
+ * Date: [26/11/23]
+ */
+
+START
+// Define CovidData structure
+Struct CovidData {
+    String country, code, continent
+    int cases, deaths
+}
+
+// Read CSV file and return CovidData array
+Func readCsv(fileName) {
+    Try {
+        Open and read CSV, create array
+        Loop through lines, extract data, and create CovidData objects
+        Return array
+    } Catch (IOException) {
+        Print error, return null
+    }
+}
+
+// Count lines in a file
+Func countLines(fileName) {
+    Try {
+        Open file, count lines, return count
+    } Catch (IOException) {
+        Handle exception
+    }
+}
+
+// Calculate death rate for CovidData
+Func deathRate(data) {
+    Return (data.deaths > 0) ? (data.deaths / data.cases) * 100 : 0
+}
+
+// Sort array in descending order based on death rates
+Func sortDescending(dataArray, deathRates) {
+    Use Bubble Sort to sort array and deathRates
+}
+
+// Filter array by continent
+Func filterByContinent(dataArray, continent) {
+    Create new array, copy entries from specified continent, return filtered array
+}
+
+// Sort array in descending order based on total cases
+Func sortByCases(dataArray) {
+    Use Bubble Sort to sort array based on total cases
+}
+
+// Sort array in descending order based on total deaths
+Func sortByDeaths(dataArray) {
+    Use Bubble Sort to sort array based on total deaths
+}
+
+// Print details of CovidData array
+Func printData(dataArray) {
+    Loop through array, print country, cases, and deaths
+}
+
+// Print death rates for each country
+Func printDeathRates(dataArray) {
+    Loop through array, print country and death rate
+}
+
+// Perform analysis on CovidData array
+Func performAnalysis(dataArray) {
+    If array length is 0, print "No data for analysis", return
+
+    Print death rates, sort by cases and deaths, print results
+
+    Calculate death rates, sort in descending order, print country with highest death rate
+}
+
+// Main function
+Func main() {
+    Create scanner
+
+    Print "Enter file name (include .csv)"
+    Read file name
+
+END

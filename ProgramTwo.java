@@ -1,9 +1,26 @@
+/*
+ * WHO Data Analysis - Program Two
+ * Author: [Hamza Ahmad]
+ * Date: [26/11/23]
+ */
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * The ProgramTwo class represents a program for analyzing Covid-19 data from a CSV file.
+ * It includes methods for reading data, performing analyses, and displaying results.
+ */
+
 public class ProgramTwo {
+
+    /**
+     * The main method where the program execution starts.
+     *
+     * @param args Command-line arguments (not used in this program).
+     */
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -32,7 +49,7 @@ public class ProgramTwo {
         }
     }
 
-
+    // Mehtod to read data from CSV and return array of covidData
     private static CovidData[] readCsv(String fileName) {
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String line;
@@ -66,6 +83,7 @@ public class ProgramTwo {
         }
     }
 
+    // Method to count number of lines in file
     private static int countLinesInFile(String fileName) throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             int count = 0;
@@ -77,6 +95,7 @@ public class ProgramTwo {
     }
 
 
+    // Method to calculate death rate
     private static float calculateDeathRate(CovidData covidData) {
         if (covidData.getCases() > 0) {
             return (float) covidData.getDeaths() / covidData.getCases() * 100;
@@ -85,7 +104,7 @@ public class ProgramTwo {
         }
     }
 
-
+    // Mehtod to sort the CovidData in decending order
     private static void sortCovidDataArrayDescending(CovidData[] covidDataArray, float[] deathRates) {
         int n = covidDataArray.length;
         boolean swapFlag;
@@ -116,6 +135,7 @@ public class ProgramTwo {
     }
 
 
+    // Method for filtering CovidData array by continent
     private static CovidData[] filterByContinent(CovidData[] covidDataArray, String continent) {
         // Count how many entries are from the specified continent
         int count = 0;
@@ -138,7 +158,9 @@ public class ProgramTwo {
         return filteredArray;
     }
 
+    // Method for sorting CovidData in descending order based on total cases
     private static void sortByTotalCases(CovidData[] covidDataArray) {
+        // Bubble sort algorithm
         int n = covidDataArray.length;
         for (int i = 0; i < n - 1; i++) {
             for (int j = 0; j < n - i - 1; j++) {
@@ -152,6 +174,7 @@ public class ProgramTwo {
         }
     }
 
+    // Method for sorting array based on total deaths
     private static void sortByTotalDeaths(CovidData[] covidDataArray) {
         int n = covidDataArray.length;
         for (int i = 0; i < n - 1; i++) {
@@ -166,12 +189,14 @@ public class ProgramTwo {
         }
     }
 
+    // Method to print CovidData Array
     private static void printCovidData(CovidData[] covidDataArray) {
         for (CovidData data : covidDataArray) {
             System.out.println(data.getCountryName() + ", " + data.getCases() + ", " + data.getDeaths());
         }
     }
 
+    // Method to display death rates for countries
     private static void printDeathRates(CovidData[] covidDataArray) {
         System.out.println("\nDeath Rates:");
         for (CovidData covidData : covidDataArray) {
@@ -181,6 +206,7 @@ public class ProgramTwo {
     }
 
 
+    // Method for performing analysis on data
     private static void performAnalysis(CovidData[] covidDataArray) {
         if (covidDataArray.length == 0) {
             System.out.println("No data available for analysis.");
@@ -189,6 +215,7 @@ public class ProgramTwo {
 
         printDeathRates(covidDataArray);
 
+        // Sorting array by total cases and show the result
         sortByTotalCases(covidDataArray);
         System.out.println("Sorted by Total Cases:");
         printCovidData(covidDataArray);
@@ -197,6 +224,7 @@ public class ProgramTwo {
         System.out.println("Sorted by Total Deaths:");
         printCovidData(covidDataArray);
 
+        // Calculating death rates for array
         float[] deathRates = new float[covidDataArray.length];
         for (int i = 0; i < covidDataArray.length; i++) {
             deathRates[i] = calculateDeathRate(covidDataArray[i]);
